@@ -1,6 +1,7 @@
 const express=require('express');
 const { runMain } = require('module');
 const { MongoClient } = require('mongodb');
+const ObjectId=require('express').ObjectId
 require('dotenv').config()
 const cors = require('cors')
 const app=express();
@@ -24,7 +25,10 @@ async function run(){
        })
        app.get('/products/:orderId',async(req,res)=>{
            const id=req.params.id;
-           console.log(id);
+           const query={_id:ObjectId(id)};
+           const product=await serviceCollection.findOne(query)
+           console.log("we are offring for pro",id);
+           res.send(product)
        })
         
 
