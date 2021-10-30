@@ -22,7 +22,10 @@ async function run(){
            const service=await cursor.toArray()
            res.json(service)
        })
-       app.get('/products/:')
+       app.get('/products/:orderId',async(req,res)=>{
+           const id=req.params.id;
+           console.log(id);
+       })
         
 
     }
