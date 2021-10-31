@@ -21,6 +21,7 @@ async function run(){
   
        app.get('/products',async(req,res)=>{
            const cursor=serviceCollection.find({})
+           
            const service=await cursor.toArray()
            res.json(service)
        })
