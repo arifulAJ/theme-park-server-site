@@ -1,13 +1,14 @@
 const express=require('express');
 const { runMain } = require('module');
 const { MongoClient } = require('mongodb');
-const ObjectId=require('express').ObjectId
+const ObjectId=require('mongodb').ObjectId
 require('dotenv').config()
 const cors = require('cors')
 const app=express();
-app.use(cors())
-const port=process.env.PORT|| 5000;
 
+const port=process.env.PORT|| 5000;
+app.use(cors());
+app.use(express.json());
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lreh2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -23,11 +24,11 @@ async function run(){
            const service=await cursor.toArray()
            res.json(service)
        })
-       app.get('/products/:orderId',async(req,res)=>{
+       app.get('/products/:id',async(req,res)=>{
            const id=req.params.id;
            const query={_id:ObjectId(id)};
            const product=await serviceCollection.findOne(query)
-           console.log("we are offring for pro",id);
+           console.log("we are offring  pro",id);
            res.send(product)
        })
         
