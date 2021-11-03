@@ -33,7 +33,12 @@ async function run(){
            res.send(product)
        })
         
-
+  app.post('/services',async(req,res)=>{
+      console.log("hit the post api")
+      const service=req.body;
+      const result=await serviceCollection.insertOne(service)
+      res.json(result)
+  })
     }
     finally{
         // await client.close();
