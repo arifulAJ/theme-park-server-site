@@ -1,5 +1,5 @@
 const express=require('express');
-const { runMain } = require('module');
+const  runMain  = require('module');
 const { MongoClient } = require('mongodb');
 const ObjectId=require('mongodb').ObjectId
 require('dotenv').config()
@@ -32,7 +32,15 @@ async function run(){
            console.log("we are offring  pro",id);
            res.send(product)
        })
-        
+    //post 
+    app.post('/addService',async(req,res)=>{
+        const user=req.body;
+        const result=await serviceCollection.insertOne(user)
+        res.send(result)
+        console.log(user);
+    })  
+    
+
   app.post('/services',async(req,res)=>{
       console.log("hit the post api")
       const service=req.body;
