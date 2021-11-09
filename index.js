@@ -17,6 +17,7 @@ async function run(){
         await client.connect();
          const database=client.db('fantasyKingdom');
          const serviceCollection=database.collection('services');
+         const orderCollection=database.collection('order');
        //  get api
   
        app.get('/products',async(req,res)=>{
@@ -40,6 +41,14 @@ async function run(){
         console.log(user);
     })  
     
+    // order post 
+    app.post('/controlOrder',async(req,res)=>{
+        const user=req.body;
+        const result=await orderCollection.insertOne(user)
+        res.send(result)
+        console.log(result);
+        console.log(user);
+    })
 
   app.post('/services',async(req,res)=>{
       console.log("hit the post api")
